@@ -70,7 +70,7 @@ class Cliente:
             except Exception:
                 print('indice do produto nao existe\n')
                 
-        
+        #teste
 
 
 
