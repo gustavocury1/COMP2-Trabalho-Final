@@ -50,7 +50,7 @@ class Cliente:
     'Preco do jogo':[]})
 
     #metodo para acessar o catalogo
-    def ver_catalogo(self):
+    def catalogo(self):
         Visualizar_catalogo()
 
 
@@ -58,14 +58,18 @@ class Cliente:
         
         while True:
             try:
-                produto=int(input('Digite o indice do produto que deseja colocar no carrinho\nCaso nao tenha escolhido ainda e deseja ver o catalago digite [-1]\n'))
+                produto=int(input('Digite o indice do produto que deseja colocar no carrinho\nCaso nao tenha escolhido ainda e deseja ver o catalago digite [-1]\nPara sair digite [-2]\n'))
                 if produto < len(Catalogo.index) and produto>=0:
                     self.carrinho.loc[produto]=Catalogo.iloc[produto]
                     print('produto adicionado!\n')
                     print('Carrinho:\n')
-                    return self.carrinho
+                    print(self.carrinho)
+                elif produto == -2:
+                    break
+
                 elif produto == -1:
-                    self.ver_catalogo()
+                    self.catalogo()
+
                 else:
                     print('indice do produto nao existe\n')
             except Exception:
@@ -76,14 +80,17 @@ class Cliente:
     def remover_produto_carrinho(self):
       while True:
          try:
-           produto=int(input('Digite o indice do produto que deseja remover do carrinho\nCaso nao tenha escolhido ainda e deseja ver o carrinho digite [-1]\n'))
+           produto=int(input('Digite o indice do produto que deseja remover do carrinho\nCaso nao tenha escolhido ainda e deseja ver o carrinho digite [-1]\nPara sair digite [-2]\n'))
            if produto < len(Catalogo.index) and produto>=0:
               self.carrinho.drop([produto],inplace=True)
               print('Produto retirado!\n')
-              return self.carrinho
+              print(self.carrinho)
                       
            elif produto == -1:
-              return self.carrinho
+              print(self.carrinho)
+
+           elif produto==-2:
+              break
 
            else:
               print('indice do produto nao existe\n')
@@ -93,7 +100,7 @@ class Cliente:
 
 
 
-           ###FALTA FAZER UM LOOPING PARA ADICONAR E RETIRAR PRODUTOS ATE QUE O CLIENTE PECA PARA PARAR
+
 
 
 
