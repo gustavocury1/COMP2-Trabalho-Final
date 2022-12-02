@@ -19,11 +19,11 @@ def Visualizar_catalogo():
 
     #filtragem por ordem alfabetica
     if filtro == 'A':
-        return Catalogo[['Nome do jogo','Preco do jogo','genero']].sort_values(by='Nome do jogo')
+      print(Catalogo[['Nome do jogo','Preco do jogo','genero']].sort_values(by='Nome do jogo'))
     
     #filtagrem por preco
     elif filtro == 'B':
-        return Catalogo[['Nome do jogo','Preco do jogo','genero']].sort_values(by='Preco do jogo')
+        print(Catalogo[['Nome do jogo','Preco do jogo','genero']].sort_values(by='Preco do jogo'))
     
     #filtagrem por genero
     elif filtro=='C':
@@ -34,7 +34,8 @@ def Visualizar_catalogo():
                     if genero != filtro:
                         Catalogo_genero.drop([indice_genero],inplace=True)
                     indice_genero+=1
-                return Catalogo_genero
+                print(Catalogo_genero)
+                break
             else:
                 print('Escolha um genero existente!\n')
     else:
@@ -58,7 +59,7 @@ class Cliente:
         while True:
             try:
                 produto=int(input('Digite o indice do produto que deseja colocar no carrinho\nCaso nao tenha escolhido ainda e deseja ver o catalago digite [-1]\n'))
-                if produto <= len(Catalogo.index) and produto>=0:
+                if produto < len(Catalogo.index) and produto>=0:
                     self.carrinho.loc[produto]=Catalogo.iloc[produto]
                     print('produto adicionado!\n')
                     print('Carrinho:\n')
@@ -69,9 +70,65 @@ class Cliente:
                     print('indice do produto nao existe\n')
             except Exception:
                 print('indice do produto nao existe\n')
+
                 
-        #teste
+
+    def remover_produto_carrinho(self):
+      while True:
+         try:
+           produto=int(input('Digite o indice do produto que deseja remover do carrinho\nCaso nao tenha escolhido ainda e deseja ver o carrinho digite [-1]\n'))
+           if produto < len(Catalogo.index) and produto>=0:
+              self.carrinho.drop([produto],inplace=True)
+              print('Produto retirado!\n')
+              return self.carrinho
+                      
+           elif produto == -1:
+              return self.carrinho
+
+           else:
+              print('indice do produto nao existe\n')
+         except Exception:
+           print('indice do produto nao existe\n')
 
 
 
 
+           ###FALTA FAZER UM LOOPING PARA ADICONAR E RETIRAR PRODUTOS ATE QUE O CLIENTE PECA PARA PARAR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           
