@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+listaUsuarios=[]
+historico_compras_todos=[]
 
 #Criacao Do Catalogo
 Catalogo=pd.DataFrame({'Nome do jogo':['Hitman','The Medium','Into The Breach','The lion','Quest','Sea','Only Memories','Kraken Academy','Assasins Creed'],\
@@ -87,7 +89,8 @@ class Cliente:
         self.nome=nome
         self.carrinho=pd.DataFrame({'Nome do jogo':[],\
     'Preco do jogo':[]})
-        self.historico_de_compras=[]
+        self.historico_de_compras=[self.nome,self.carrinho.columns.values.tolist()]
+        listaUsuarios.append(self.nome)
 
     #metodo para acessar o catalogo
     def catalogo(self):
@@ -143,22 +146,31 @@ class Cliente:
 
         for preco in self.carrinho['Preco do jogo']:
             valor_carrinho +=preco
-        print(f'Valor Total do carrinho = {valor_carrinho}') 
+        print(f'Valor Total do carrinho = {valor_carrinho}\n') 
 
 
 
     def finalizar_compra(self):
-        historico_de_compras=[]
+
+        self.valor_carrinho()
+
         for jogo in self.carrinho['Nome do jogo']:
             Catalogo.loc[Catalogo['Nome do jogo']==jogo,"Estoque"]-=1
-        self.historico_de_compras.append([self.carrinho.columns.values.tolist()] + self.carrinho.values.tolist())
 
-    
+        
+
+        self.historico_de_compras.append(self.carrinho.values.tolist())
+
+        self.carrinho=pd.DataFrame({'Nome do jogo':[],\
+            'Preco do jogo':[]})
+        print('Compra Finalizada!!!')
+
+        historico_compras_todos.append(self.historico_de_compras)
+
+
 
 
         
-            
-
 
 
 
@@ -169,50 +181,8 @@ class Vendedor(Cliente):
     def catalogo(self):
         Visualizar_catalogoVendedor()
 
-    
-gc=Cliente('gc')
-gc.adicionar_produto_carrinho()
-gc.finalizar_compra()
-    
+    def historico_compras_todos(self):
+        print(historico_compras_todos)
 
+        
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-           
