@@ -170,10 +170,6 @@ class Cliente:
 
 
 
-        
-
-
-
 class Vendedor(Cliente):
     def __init__(self, nome):
         super().__init__(nome)
@@ -184,5 +180,68 @@ class Vendedor(Cliente):
     def historico_compras_todos(self):
         print(historico_compras_todos)
 
-        
+
+
+
+class Administrador(Vendedor):
+    def __init__(self, nome):
+        super().__init__(nome)
+
+
+    def adicionar_produto_estoque(self):
+         while True:
+            try:
+                produto=int(input('\nDigite o indice do produto que deseja adionar ao estoque\nCaso nao tenha escolhido ainda e deseja ver o catalago digite [-1]\nPara sair digite [-2]\n'))
+                if produto < len(Catalogo.index) and produto>=0:
+                    while True:
+                        try:
+                            qntd=int(input('\nDigite a quantidade desse produto que deseja adicionar ao estoque\n'))
+                            Catalogo['Estoque'][produto]+=qntd
+                            print('\nEstoque atualizado!!!\n')
+                            break
+
+                        except Exception:
+                            print('A quandidade tem que ser um numero inteiro!')
+
+
+                elif produto == -2:
+                    break
+
+                elif produto == -1:
+                    self.catalogo()
+
+                else:
+                    print('indice do produto nao existe\n')
+            except Exception:
+                print('indice do produto nao existe\n')
+
+
+
+    def alterar_preco(self):
+         while True:
+            try:
+                produto=int(input('\nDigite o indice do produto que deseja alterar o preco\nCaso nao tenha escolhido ainda e deseja ver o catalago digite [-1]\nPara sair digite [-2]\n'))
+                if produto < len(Catalogo.index) and produto>=0:
+                    while True:
+                        try:
+                            preco=float(input('\nDigite o novo preco do produto\n'))
+                            Catalogo['Preco do jogo'][produto]=preco
+                            print('\nPreco atualizado!!!\n')
+                            break
+
+                        except Exception:
+                            print('o preco tem que ser um numero!!!')
+
+
+                elif produto == -2:
+                    break
+
+                elif produto == -1:
+                    self.catalogo()
+
+                else:
+                    print('indice do produto nao existe\n')
+            except Exception:
+                print('indice do produto nao existe\n')
+
 
